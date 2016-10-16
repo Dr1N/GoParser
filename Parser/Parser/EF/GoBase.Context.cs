@@ -7,12 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Parser.EF
+namespace Parser
 {
-    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class GoPrarserEntities : DbContext
     {
         public GoPrarserEntities()

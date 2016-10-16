@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace Parser
 {
     static class Program
     {
+        public static Logger logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

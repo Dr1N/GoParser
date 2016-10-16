@@ -1,22 +1,13 @@
-﻿using Parser.EF;
+﻿using Parser;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.Entity;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using NLog;
-using xNet;
 
 namespace Parser
 {
     public partial class Main : Form
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private GoParser goParser = new GoParser();
 
         public Main()
         {
@@ -25,12 +16,12 @@ namespace Parser
 
         private void button1_Click(object sender, EventArgs e)
         {
-            GoPrarserEntities context = new GoPrarserEntities();
-            DbSet<countries> countries = context.countries;
-            foreach (var county in countries)
-            {
-                logger.Trace(county.name);
-            }
+            this.goParser.ParseCities();
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            Program.logger.Trace("Test!");
         }
     }
 }
