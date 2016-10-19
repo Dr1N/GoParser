@@ -6,16 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Parser.EF;
 
 namespace Parser
 {
-
     public class GoParser
     {
         private readonly string category = "view_subsection.php?id_subsection=146";
 
-        private GoPrarserEntities context = new GoPrarserEntities();
+        private GoDB db = new GoDB();
         private HtmlParser htmlParser = new HtmlParser();
 
         public GoParser()
@@ -35,7 +34,8 @@ namespace Parser
 
         private List<countries> GetCountries()
         {
-           return context.countries.ToList();
+           var tmp = this.db.countries;
+           return db.countries.ToList();
         }
 
         private async void GetPage()

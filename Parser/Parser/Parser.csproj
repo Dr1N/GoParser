@@ -80,28 +80,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF\ads.cs">
-      <DependentUpon>GoBase.tt</DependentUpon>
+      <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\cities.cs">
-      <DependentUpon>GoBase.tt</DependentUpon>
+      <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\countries.cs">
-      <DependentUpon>GoBase.tt</DependentUpon>
+      <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\GoBase.Context.cs">
+    <Compile Include="EF\DbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GoBase.Context.tt</DependentUpon>
+      <DependentUpon>DbModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\GoBase.cs">
+    <Compile Include="EF\DbModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GoBase.tt</DependentUpon>
+      <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\GoBase.Designer.cs">
+    <Compile Include="EF\DbModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GoBase.edmx</DependentUpon>
+      <DependentUpon>DbModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="GoParser.cs" />
     <Compile Include="Main.cs">
@@ -124,25 +124,25 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Content Include="EF\GoBase.Context.tt">
+    <Content Include="EF\DbModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GoBase.edmx</DependentUpon>
-      <LastGenOutput>GoBase.Context.cs</LastGenOutput>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+      <LastGenOutput>DbModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="EF\GoBase.tt">
+    <Content Include="EF\DbModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>GoBase.edmx</DependentUpon>
-      <LastGenOutput>GoBase.cs</LastGenOutput>
+      <DependentUpon>DbModel.edmx</DependentUpon>
+      <LastGenOutput>DbModel.cs</LastGenOutput>
     </Content>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="EF\GoBase.edmx">
+    <EntityDeploy Include="EF\DbModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GoBase.Designer.cs</LastGenOutput>
+      <LastGenOutput>DbModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="EF\GoBase.edmx.diagram">
-      <DependentUpon>GoBase.edmx</DependentUpon>
+    <None Include="EF\DbModel.edmx.diagram">
+      <DependentUpon>DbModel.edmx</DependentUpon>
     </None>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>

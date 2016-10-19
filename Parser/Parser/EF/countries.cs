@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Parser
+namespace Parser.EF
 {
     using System;
     using System.Collections.Generic;
