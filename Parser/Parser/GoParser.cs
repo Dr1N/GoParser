@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Parser.EF;
+using AngleSharp.Dom;
+using xNet;
 
 namespace Parser
 {
@@ -17,41 +19,67 @@ namespace Parser
         private GoDB db = new GoDB();
         private HtmlParser htmlParser = new HtmlParser();
 
-        public GoParser()
-        {
-            
-        }
+        public GoParser() { }
 
         public void ParseCities()
         {
+            List<cities> result = new List<cities>();
             List<countries> countries = this.GetCountries();
-            foreach (var item in countries)
+            foreach (var country in countries)
             {
-                string url = String.Format("{0}{1}", item.url, this.category);
-                Program.logger.Trace(url);
+                List<string> regions =  this.GetRegions(country.url);
+                foreach (var region in regions)
+                {
+                    Console.WriteLine(region);
+                }
             }
+        }
+
+        private int ClearCities()
+        {
+            this.db.cities.RemoveRange(this.db.cities);
+            return this.db.SaveChanges();
+        }
+
+        private List<string> GetRegions(string url)
+        {
+            List<string> result = new List<string>();
+            var document = this.GetPage(url);
+            var tables = document.QuerySelectorAll("body>table");
+            if (tables != null)
+            {
+                var regions = tables[3].QuerySelectorAll("a.link");
+                if (regions != null)
+                {
+                    foreach (var region in regions)
+                    {
+                        if (region.InnerHtml != "Все")
+                        {
+                            result.Add(region.GetAttribute("href"));
+                        }
+                    }
+                }
+            }
+
+            return result;
         }
 
         private List<countries> GetCountries()
         {
            var tmp = this.db.countries;
+
            return db.countries.ToList();
         }
 
-        private async void GetPage()
+        private IDocument GetPage(string url)
         {
-            // Setup the configuration to support document loading
-            var config = Configuration.Default.WithDefaultLoader();
-            // Load the names of all The Big Bang Theory episodes from Wikipedia
-            var address = "https://en.wikipedia.org/wiki/List_of_The_Big_Bang_Theory_episodes";
-            // Asynchronously get the document in a new context using the configuration
-            var document = await BrowsingContext.New(config).OpenAsync(address);
-            // This CSS selector gets the desired content
-            var cellSelector = "tr.vevent td:nth-child(3)";
-            // Perform the query to get all cells with the content
-            var cells = document.QuerySelectorAll(cellSelector);
-            // We are only interested in the text - select it with LINQ
-            var titles = cells.Select(m => m.TextContent);
+            string content = String.Empty;
+            using (var request = new HttpRequest())
+            {
+                content = request.Get(url).ToString();
+            }
+
+            return this.htmlParser.Parse(content);
         }
     }
 }
