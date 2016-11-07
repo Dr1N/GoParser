@@ -1,11 +1,7 @@
 ﻿using AngleSharp.Parser.Html;
-using AngleSharp;
-using Parser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Parser.EF;
 using AngleSharp.Dom;
 using xNet;
@@ -23,14 +19,17 @@ namespace Parser
 
         public void ParseCities()
         {
-            List<cities> result = new List<cities>();
             List<countries> countries = this.GetCountries();
             foreach (var country in countries)
             {
                 List<string> regions =  this.GetRegions(country.url);
                 foreach (var region in regions)
                 {
-                    Console.WriteLine(region);
+                    HashSet<string> cities = GetCitiesFromRegion(region);
+                    foreach (var item in cities)
+                    {
+                        Console.WriteLine(item);
+                    }
                 }
             }
         }
@@ -48,17 +47,30 @@ namespace Parser
             var tables = document.QuerySelectorAll("body>table");
             if (tables != null)
             {
-                var regions = tables[3].QuerySelectorAll("a.link");
+                var regions = tables[3].QuerySelectorAll("td>a.link");
                 if (regions != null)
                 {
                     foreach (var region in regions)
                     {
-                        if (region.InnerHtml != "Все")
+                        if (region.InnerHtml != "Все" && region.GetAttribute("href") != url)
                         {
                             result.Add(region.GetAttribute("href"));
                         }
                     }
                 }
+            }
+
+            return result;
+        }
+
+        private HashSet<string> GetCitiesFromRegion(string url)
+        {
+            HashSet<string> result = new HashSet<string>();
+            var document = this.GetPage(url);
+            var cities = document.QuerySelectorAll("td>li>a.link");
+            foreach (var city in cities)
+            {
+                result.Add(city.GetAttribute("href"));
             }
 
             return result;

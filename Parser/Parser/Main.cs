@@ -14,11 +14,6 @@ namespace Parser
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.goParser.ParseCities();
-        }
-
         private void btnTest_Click(object sender, EventArgs e)
         {
             Program.logger.Trace("Test!");
