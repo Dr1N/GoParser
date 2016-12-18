@@ -53,7 +53,8 @@ CREATE TABLE IF NOT EXISTS `cities` (
   `id` int(11) NOT NULL,
   `country_id` int(11) NOT NULL COMMENT 'Country Id',
   `name` varchar(32) NOT NULL COMMENT 'Name of City',
-  `prefix` varchar(32) NOT NULL COMMENT 'Prefix for URL'
+  `prefix` varchar(32) NOT NULL COMMENT 'Prefix for URL',
+  'url' varchar(255) NOT NULL COMMENT 'City Url',
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Cities from site';
 
 -- --------------------------------------------------------
